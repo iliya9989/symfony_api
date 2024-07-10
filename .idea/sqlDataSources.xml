@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="f26b3ca9-71d4-4ea0-bda7-1ef81a43b33a" name="galaxy@dontpanic.k42.app Mapping">
+      <data-sources db="dce24737-1594-499f-9bc4-7dd40900bb9a" />
+      <scope>
+        <node kind="database" qname="galaxy" />
+      </scope>
+    </mapping>
+  </component>
+</project>
