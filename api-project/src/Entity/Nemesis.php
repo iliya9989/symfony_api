@@ -1,5 +1,6 @@
 <?php
 
+// src/Entity/Nemesis.php
 namespace App\Entity;
 
 use App\Repository\NemesisRepository;
@@ -22,10 +23,10 @@ class Nemesis
     private ?int $years = null;
 
     #[ORM\ManyToOne(inversedBy: 'nemeses')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Character $character_id = null;
+    #[ORM\JoinColumn(name: 'character_id', referencedColumnName: 'id', nullable: false)]
+    private ?Character $character = null;
 
-    #[ORM\OneToMany(targetEntity: Secret::class, mappedBy: 'nemesis_id', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Secret::class, mappedBy: 'nemesis', orphanRemoval: true)]
     private Collection $secrets;
 
     public function __construct()
@@ -62,14 +63,14 @@ class Nemesis
         return $this;
     }
 
-    public function getCharacterId(): ?Character
+    public function getCharacter(): ?Character
     {
-        return $this->character_id;
+        return $this->character;
     }
 
-    public function setCharacterId(?Character $character_id): static
+    public function setCharacter(?Character $character): static
     {
-        $this->character_id = $character_id;
+        $this->character = $character;
 
         return $this;
     }
@@ -86,7 +87,7 @@ class Nemesis
     {
         if (!$this->secrets->contains($secret)) {
             $this->secrets->add($secret);
-            $secret->setNemesisId($this);
+            $secret->setNemesis($this);
         }
 
         return $this;
@@ -96,8 +97,8 @@ class Nemesis
     {
         if ($this->secrets->removeElement($secret)) {
             // set the owning side to null (unless already changed)
-            if ($secret->getNemesisId() === $this) {
-                $secret->setNemesisId(null);
+            if ($secret->getNemesis() === $this) {
+                $secret->setNemesis(null);
             }
         }
 

@@ -1,5 +1,6 @@
 <?php
 
+// src/Entity/Secret.php
 namespace App\Entity;
 
 use App\Repository\SecretRepository;
@@ -17,8 +18,8 @@ class Secret
     private ?int $secret_code = null;
 
     #[ORM\ManyToOne(inversedBy: 'secrets')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Nemesis $nemesis_id = null;
+    #[ORM\JoinColumn(name: 'nemesis_id', referencedColumnName: 'id', nullable: false)]
+    private ?Nemesis $nemesis = null;
 
     public function getId(): ?int
     {
@@ -37,14 +38,14 @@ class Secret
         return $this;
     }
 
-    public function getNemesisId(): ?Nemesis
+    public function getNemesis(): ?Nemesis
     {
-        return $this->nemesis_id;
+        return $this->nemesis;
     }
 
-    public function setNemesisId(?Nemesis $nemesis_id): static
+    public function setNemesis(?Nemesis $nemesis): static
     {
-        $this->nemesis_id = $nemesis_id;
+        $this->nemesis = $nemesis;
 
         return $this;
     }

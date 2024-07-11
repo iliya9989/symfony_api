@@ -1,5 +1,6 @@
 <?php
 
+// src/Entity/Character.php
 namespace App\Entity;
 
 use App\Repository\CharacterRepository;
@@ -43,7 +44,7 @@ class Character
     #[ORM\Column]
     private ?bool $knows_the_answer = null;
 
-    #[ORM\OneToMany(targetEntity: Nemesis::class, mappedBy: 'character_id', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Nemesis::class, mappedBy: 'character', orphanRemoval: true)]
     private Collection $nemeses;
 
     public function __construct()
@@ -51,6 +52,7 @@ class Character
         $this->nemeses = new ArrayCollection();
     }
 
+    // Add getters and setters for all properties
     public function getId(): ?int
     {
         return $this->id;
@@ -172,22 +174,22 @@ class Character
         return $this->nemeses;
     }
 
-    public function addNemese(Nemesis $nemese): static
+    public function addNemesis(Nemesis $nemesis): static
     {
-        if (!$this->nemeses->contains($nemese)) {
-            $this->nemeses->add($nemese);
-            $nemese->setCharacterId($this);
+        if (!$this->nemeses->contains($nemesis)) {
+            $this->nemeses->add($nemesis);
+            $nemesis->setCharacter($this);
         }
 
         return $this;
     }
 
-    public function removeNemese(Nemesis $nemese): static
+    public function removeNemesis(Nemesis $nemesis): static
     {
-        if ($this->nemeses->removeElement($nemese)) {
+        if ($this->nemeses->removeElement($nemesis)) {
             // set the owning side to null (unless already changed)
-            if ($nemese->getCharacterId() === $this) {
-                $nemese->setCharacterId(null);
+            if ($nemesis->getCharacter() === $this) {
+                $nemesis->setCharacter(null);
             }
         }
 
