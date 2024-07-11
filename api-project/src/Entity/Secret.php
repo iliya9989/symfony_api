@@ -1,6 +1,5 @@
 <?php
 
-// src/Entity/Secret.php
 namespace App\Entity;
 
 use App\Repository\SecretRepository;

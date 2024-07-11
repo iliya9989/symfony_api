@@ -1,6 +1,5 @@
 <?php
 
-// src/Entity/Character.php
 namespace App\Entity;
 
 use App\Repository\CharacterRepository;
@@ -52,7 +51,6 @@ class Character
         $this->nemeses = new ArrayCollection();
     }
 
-    // Add getters and setters for all properties
     public function getId(): ?int
     {
         return $this->id;

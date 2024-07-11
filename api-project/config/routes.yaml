@@ -1,3 +1,23 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+api:
+    path: /api
+    controller: App\Controller\ApiController::getCharacters
+    methods: GET
+
+api_character:
+    path: /api/characters/{id}
+    controller: App\Controller\ApiController::getCharacter
+    methods: GET
+
+api_nemesis:
+    path: /api/nemeses/{id}
+    controller: App\Controller\ApiController::getNemesis
+    methods: GET
+
+api_secret:
+    path: /api/secrets/{id}
+    controller: App\Controller\ApiController::getSecret
+    methods: GET

@@ -1,6 +1,5 @@
 <?php
 
-// src/Entity/Nemesis.php
 namespace App\Entity;
 
 use App\Repository\NemesisRepository;
@@ -96,7 +95,6 @@ class Nemesis
     public function removeSecret(Secret $secret): static
     {
         if ($this->secrets->removeElement($secret)) {
-            // set the owning side to null (unless already changed)
             if ($secret->getNemesis() === $this) {
                 $secret->setNemesis(null);
             }
